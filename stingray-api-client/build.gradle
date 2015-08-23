@@ -1,0 +1,51 @@
+apply plugin: 'com.android.library'
+
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'stingray-api-client'
+
+    publishedGroupId = 'org.stingraymappingproject.api'
+    libraryName = 'StingrayAPIClient'
+    artifact = 'stingray-api-client'
+
+    libraryDescription = 'Android API client for Stingray Mapping Project'
+
+    siteUrl = 'https://github.com/marvinmarnold/StingrayAPIClient'      // Homepage URL of the library
+    gitUrl = 'https://github.com/marvinmarnold/StingrayAPIClient.git'   // Git repository URL
+
+    libraryVersion = '0.0.51'
+
+    developerId = 'marvinmarnold'
+    developerName = 'Marvin Arnold'
+    developerEmail = 'marvin@unplugged.im'
+
+    licenseName = 'GPLv3'
+    licenseUrl = 'https://www.gnu.org/licenses/gpl-3.0.en.html'
+    allLicenses = ["GPL-3.0"]
+}
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:22.2.1'
+}
+
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
