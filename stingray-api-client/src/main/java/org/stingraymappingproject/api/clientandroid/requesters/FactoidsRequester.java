@@ -19,11 +19,6 @@ public abstract class FactoidsRequester extends Requester<Factoid[]> {
         return null;
     }
 
-//    @Override
-//    protected Map<String, String> getRequestHeaders() {
-//        return null;
-//    }
-
     @Override
     protected GsonRequest<Factoid[]> getRequest() {
         return getRequest("factoids", Request.Method.GET, Factoid[].class);

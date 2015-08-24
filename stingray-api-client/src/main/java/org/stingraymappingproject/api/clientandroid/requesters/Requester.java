@@ -10,7 +10,6 @@ import org.stingraymappingproject.api.clientandroid.GsonRequest;
  */
 public abstract class Requester<T> implements Runnable, Response.Listener<T>, Response.ErrorListener {
     private final StingrayAPIClientService mStingrayAPIClientService;
-//    protected abstract Map<String, String> getRequestHeaders();
     protected abstract String getRequestParams();
     protected abstract GsonRequest<T> getRequest();
 
