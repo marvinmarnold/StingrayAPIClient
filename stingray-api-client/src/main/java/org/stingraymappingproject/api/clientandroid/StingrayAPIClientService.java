@@ -20,7 +20,7 @@ import java.util.concurrent.ScheduledExecutorService;
 /**
  * Created by Marvin Arnold on 23/08/15.
  */
-public class ClientService extends Service {
+public class StingrayAPIClientService extends Service {
     // Constants
     private static final String TAG = "DataTrackerService";
     public static String ACTION_SYNC_DATA = "ACTION_SYNC_DATA";
@@ -48,8 +48,8 @@ public class ClientService extends Service {
     public boolean isInitialized = false;
 
     public class ClientServiceBinder extends Binder {
-        public ClientService getService() {
-            return ClientService.this;
+        public StingrayAPIClientService getService() {
+            return StingrayAPIClientService.this;
         }
     }
 
@@ -74,16 +74,15 @@ public class ClientService extends Service {
     }
 
     public void queueOfflineRequests() {
-//        Log.d(TAG, "queueOfflineRequests");
-//        if(isInitialized && isOnline()) {
-//            ArrayList<GsonRequest> t = (ArrayList<GsonRequest>) mOfflineRequests.clone();
-//            mOfflineRequests.clear();
-//
-//            for(GsonRequest offlineRequest : t) {
-//                Log.d(TAG, "Syncing offlineRequests");
-//                mRequestQueue.add(offlineRequest.buildRequest());
-//            }
-//        }
+        Log.d(TAG, "queueOfflineRequests");
+        if(isInitialized && isOnline()) {
+            ArrayList<GsonRequest> t = (ArrayList<GsonRequest>) mOfflineRequests.clone();
+            mOfflineRequests.clear();
+            for(GsonRequest offlineRequest : t) {
+                Log.d(TAG, "Syncing offlineRequests");
+                mRequestQueue.add(offlineRequest);
+            }
+        }
     }
 
     public boolean isOnline() {

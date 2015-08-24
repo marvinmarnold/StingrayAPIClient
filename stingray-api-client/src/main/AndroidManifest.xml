@@ -5,7 +5,7 @@
 
     <application>
         <service
-            android:name=".ClientService"
+            android:name=".StingrayAPIClientService"
             android:enabled="true"
             android:exported="false">
         </service>

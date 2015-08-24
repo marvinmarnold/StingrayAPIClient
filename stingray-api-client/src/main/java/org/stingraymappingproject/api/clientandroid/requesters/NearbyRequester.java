@@ -2,7 +2,7 @@ package org.stingraymappingproject.api.clientandroid.requesters;
 
 import com.android.volley.Request;
 
-import org.stingraymappingproject.api.clientandroid.ClientService;
+import org.stingraymappingproject.api.clientandroid.StingrayAPIClientService;
 import org.stingraymappingproject.api.clientandroid.GsonRequest;
 import org.stingraymappingproject.api.clientandroid.models.StingrayReading;
 
@@ -11,8 +11,8 @@ import org.stingraymappingproject.api.clientandroid.models.StingrayReading;
  */
 public abstract class NearbyRequester extends Requester<StingrayReading[]> {
 
-    public NearbyRequester(ClientService clientService) {
-        super(clientService);
+    public NearbyRequester(StingrayAPIClientService stingrayAPIClientService) {
+        super(stingrayAPIClientService);
     }
 
     @Override

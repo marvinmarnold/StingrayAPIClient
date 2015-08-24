@@ -39,5 +39,4 @@ public class RecurringRequest {
         this.mRequester.cancel(true);
         this.isScheduled = false;
     }
-
 }

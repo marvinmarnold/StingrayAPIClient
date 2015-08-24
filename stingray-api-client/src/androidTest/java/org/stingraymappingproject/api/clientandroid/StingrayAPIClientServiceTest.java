@@ -9,26 +9,25 @@ import android.test.suitebuilder.annotation.SmallTest;
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
 
-import org.json.JSONObject;
 import org.stingraymappingproject.api.clientandroid.requesters.Requester;
 
 /**
  * Created by Marvin Arnold on 23/08/15.
  */
-public class ClientServiceTest extends ServiceTestCase<ClientService> {
+public class StingrayAPIClientServiceTest extends ServiceTestCase<StingrayAPIClientService> {
     String apiBaseUrl = "http://test.example.com/";
     String apiEndpoint1 = "test";
 
     /**
      * Constructor
      */
-    public ClientServiceTest() {
-        super(ClientService.class);
+    public StingrayAPIClientServiceTest() {
+        super(StingrayAPIClientService.class);
     }
 
     public void testRequestsPointToFullApiUrl() {
         startService();
-        ClientService client = getService();
+        StingrayAPIClientService client = getService();
         client.setApiBaseUrl(apiBaseUrl);
 
         TestRequester r = new TestRequester(client);
@@ -37,15 +36,15 @@ public class ClientServiceTest extends ServiceTestCase<ClientService> {
 
     public void testInitializes() {
         startService();
-        ClientService client = getService();
+        StingrayAPIClientService client = getService();
         client.init();
         assertTrue(client.isInitialized);
     }
 
     class TestRequester extends Requester {
 
-        public TestRequester(ClientService clientService) {
-            super(clientService);
+        public TestRequester(StingrayAPIClientService stingrayAPIClientService) {
+            super(stingrayAPIClientService);
         }
 
         @Override
@@ -59,7 +58,7 @@ public class ClientServiceTest extends ServiceTestCase<ClientService> {
         }
 
         @Override
-        protected JSONObject getJSONObjectParameters() {
+        protected String getRequestParams() {
             return null;
         }
 
@@ -101,7 +100,7 @@ public class ClientServiceTest extends ServiceTestCase<ClientService> {
 
     public void startService() {
         Intent startIntent = new Intent();
-        startIntent.setClass(getContext(), ClientService.class);
+        startIntent.setClass(getContext(), StingrayAPIClientService.class);
         startService(startIntent);
     }
 }

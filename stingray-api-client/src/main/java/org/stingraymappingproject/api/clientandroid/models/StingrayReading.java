@@ -7,9 +7,6 @@ public class StingrayReading {
     String id;
     String observed_at;
 
-    public StingrayReading(String lat) {
-        this.lat = lat;
-    }
 
     public String getId() {
         return id;
@@ -39,14 +36,12 @@ public class StingrayReading {
         return version;
     }
 
-    public String getLat() {
-        return lat;
-    }
 
     String location;
     String threat_level;
     String updated_at;
     String created_at;
     String version;
-    String lat;
+    String latitude;
+    String longitude;
 }
