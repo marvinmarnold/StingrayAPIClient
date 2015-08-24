@@ -6,10 +6,20 @@ import android.test.ServiceTestCase;
 import android.test.suitebuilder.annotation.MediumTest;
 import android.test.suitebuilder.annotation.SmallTest;
 
+import com.android.volley.Request;
+import com.android.volley.VolleyError;
+
+import org.json.JSONObject;
+import org.stingraymappingproject.api.clientandroid.RequestParams.RequestParams;
+import org.stingraymappingproject.api.clientandroid.RequestRunnable.JsonObjectResponseRequester;
+
 /**
  * Created by Marvin Arnold on 23/08/15.
  */
 public class ClientServiceTest extends ServiceTestCase<ClientService> {
+    String apiBaseUrl = "http://test.example.com/";
+    String apiEndpoint1 = "test";
+
     /**
      * Constructor
      *
@@ -47,5 +57,44 @@ public class ClientServiceTest extends ServiceTestCase<ClientService> {
      */
     @SmallTest
     public void testPreconditions() {
+    }
+
+    public void testRequestsPointToFullApiUrl() {
+        ClientService client = new ClientService();
+
+        client.setApiBaseUrl(apiBaseUrl);
+
+        TestJsonObjectResponseRequester r = new TestJsonObjectResponseRequester(client);
+        assertEquals(apiBaseUrl + apiEndpoint1, r.testGetRequestParams());
+    }
+    class TestJsonObjectResponseRequester extends JsonObjectResponseRequester {
+
+        public TestJsonObjectResponseRequester(ClientService clientService) {
+            super(clientService);
+        }
+
+        @Override
+        protected JSONObject getJSONObject() {
+            return null;
+        }
+
+        @Override
+        protected RequestParams getRequestParams() {
+            return getRequestParams(apiEndpoint1, Request.Method.GET);
+        }
+
+        public RequestParams testGetRequestParams() {
+            return getRequestParams();
+        }
+
+        @Override
+        public void onErrorResponse(VolleyError error) {
+
+        }
+
+        @Override
+        public void onResponse(Object response) {
+
+        }
     }
 }

@@ -9,10 +9,8 @@ import org.stingraymappingproject.api.clientandroid.RequestParams.RequestParams;
 /**
  * Created by Marvin Arnold on 23/08/15.
  */
-public abstract class RequestRunnable implements Runnable {
+public abstract class Requester implements Runnable, Response.Listener, Response.ErrorListener {
     private final ClientService mClientService;
-    protected final Response.Listener mSuccessListener;
-    protected final Response.ErrorListener mErrorListener;
     protected abstract JSONObject getJSONObject();
     protected abstract RequestParams getRequestParams();
 
@@ -20,10 +18,8 @@ public abstract class RequestRunnable implements Runnable {
         return mClientService.getApiBaseUrl() + endpointPath;
     }
 
-    public RequestRunnable(ClientService clientService, Response.Listener successListener, Response.ErrorListener errorListener) {
+    public Requester(ClientService clientService) {
         this.mClientService = clientService;
-        this.mSuccessListener = successListener;
-        this.mErrorListener = errorListener;
     }
 
     @Override

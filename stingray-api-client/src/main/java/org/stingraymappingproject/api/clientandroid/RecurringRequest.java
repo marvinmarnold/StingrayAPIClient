@@ -2,7 +2,7 @@ package org.stingraymappingproject.api.clientandroid;
 
 import android.util.Log;
 
-import org.stingraymappingproject.api.clientandroid.RequestRunnable.RequestRunnable;
+import org.stingraymappingproject.api.clientandroid.RequestRunnable.Requester;
 
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -13,13 +13,13 @@ import java.util.concurrent.TimeUnit;
  */
 public class RecurringRequest {
     private static final String TAG = "RecurringRequest";
-    private RequestRunnable mRunnable;
+    private Requester mRunnable;
     private boolean isScheduled;
     private ScheduledFuture mRequester;
     private final int mFrequencyValue;
     private final TimeUnit mFrequencyUnit;
 
-    public RecurringRequest(int frequencyValue, TimeUnit frequencyUnit, RequestRunnable runnable) {
+    public RecurringRequest(int frequencyValue, TimeUnit frequencyUnit, Requester runnable) {
         this.mFrequencyValue = frequencyValue;
         this.mFrequencyUnit = frequencyUnit;
         this.mRunnable = runnable;

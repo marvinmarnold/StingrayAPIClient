@@ -1,7 +1,6 @@
 package org.stingraymappingproject.api.clientandroid.RequestRunnable;
 
 import com.android.volley.Request;
-import com.android.volley.Response;
 
 import org.stingraymappingproject.api.clientandroid.ClientService;
 import org.stingraymappingproject.api.clientandroid.RequestParams.RequestParams;
@@ -9,10 +8,10 @@ import org.stingraymappingproject.api.clientandroid.RequestParams.RequestParams;
 /**
  * Created by Marvin Arnold on 23/08/15.
  */
-public abstract class PostStingrayReadingRequest extends JsonObjectResponseRequestRunnable {
+public abstract class PostStingrayReadingRequester extends JsonObjectResponseRequester {
 
-    public PostStingrayReadingRequest(ClientService clientService, Response.Listener successListener, Response.ErrorListener errorListener) {
-        super(clientService, successListener, errorListener);
+    public PostStingrayReadingRequester(ClientService clientService) {
+        super(clientService);
     }
 
     @Override

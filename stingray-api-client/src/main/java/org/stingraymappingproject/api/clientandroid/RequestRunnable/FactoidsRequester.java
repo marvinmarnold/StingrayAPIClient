@@ -1,7 +1,6 @@
 package org.stingraymappingproject.api.clientandroid.RequestRunnable;
 
 import com.android.volley.Request;
-import com.android.volley.Response;
 
 import org.json.JSONObject;
 import org.stingraymappingproject.api.clientandroid.ClientService;
@@ -10,10 +9,10 @@ import org.stingraymappingproject.api.clientandroid.RequestParams.RequestParams;
 /**
  * Created by Marvin Arnold on 23/08/15.
  */
-public class FactoidsRequestRunnable extends JsonArrayResponseRequestRunnable {
+public abstract class FactoidsRequester extends JsonArrayResponseRequester {
 
-    public FactoidsRequestRunnable(ClientService clientService, Response.Listener successListener, Response.ErrorListener errorListener) {
-        super(clientService, successListener, errorListener);
+    public FactoidsRequester(ClientService clientService) {
+        super(clientService);
     }
 
     @Override
@@ -25,4 +24,5 @@ public class FactoidsRequestRunnable extends JsonArrayResponseRequestRunnable {
     protected RequestParams getRequestParams() {
         return getRequestParams("factoids", Request.Method.GET);
     }
+
 }
