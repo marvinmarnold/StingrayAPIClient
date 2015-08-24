@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ClientAndroid.iml" filepath="$PROJECT_DIR$/ClientAndroid.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/clientandroid/stingray-api-client.iml" filepath="$PROJECT_DIR$/clientandroid/stingray-api-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/stingray-api-client/stingray-api-client.iml" filepath="$PROJECT_DIR$/stingray-api-client/stingray-api-client.iml" />
     </modules>
   </component>
 </project>

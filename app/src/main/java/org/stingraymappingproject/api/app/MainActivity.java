@@ -13,11 +13,14 @@ import android.view.MenuItem;
 
 import com.android.volley.VolleyError;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.stingraymappingproject.api.clientandroid.ClientService;
 import org.stingraymappingproject.api.clientandroid.RecurringRequest;
 import org.stingraymappingproject.api.clientandroid.models.Factoid;
+import org.stingraymappingproject.api.clientandroid.models.StingrayReading;
 import org.stingraymappingproject.api.clientandroid.requesters.FactoidsRequester;
-import org.stingraymappingproject.api.clientandroid.requesters.Requester;
+import org.stingraymappingproject.api.clientandroid.requesters.PostStingrayReadingRequester;
 
 import java.util.Arrays;
 import java.util.List;
@@ -91,8 +94,7 @@ public class MainActivity extends AppCompatActivity {
             mStingrayClientService = ((ClientService.ClientServiceBinder) service).getService();
             mBoundToStingrayClientService = true;
 
-            Requester<Factoid[]> factoidsRequester = new FactoidsRequester(mStingrayClientService) {
-
+            FactoidsRequester factoidsRequester = new FactoidsRequester(mStingrayClientService) {
                 @Override
                 public void onResponse(Factoid[] response) {
                     List<Factoid> factoids = Arrays.asList(response);
@@ -107,9 +109,59 @@ public class MainActivity extends AppCompatActivity {
                     Log.d(TAG, "onErrorResponse");
                 }
             };
-
             RecurringRequest recurringFactoidsRequest = new RecurringRequest(FACTOIDS_FREQUENCY_VALUE, FACTOIDS_FREQUENCY_UNIT, factoidsRequester);
             mStingrayClientService.addRecurringRequest(recurringFactoidsRequest);
+
+            PostStingrayReadingRequester postStingrayReadingRequester = new PostStingrayReadingRequester(mStingrayClientService) {
+                @Override
+                protected String getRequestParams() {
+                    JSONObject imsiFields = new JSONObject();
+                    JSONObject datum = new JSONObject();
+
+                    try {
+                        imsiFields.put("threat_level", 5);
+                        datum.put("stingray_reading", imsiFields);
+                    } catch (JSONException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+
+                    return datum.toString();
+                }
+//                @Override
+//                protected Map<String, String> getRequestHeaders() {
+//                    Map<String, String> headers = new HashMap();
+//                    Gson gson = new Gson();
+//                    StingrayReading reading = new StingrayReading("12");
+//                    Log.d(TAG, "HEADERS: " + gson.toJson(reading));
+//                    headers.put("stingray_reading", gson.toJson(reading));
+//                    return headers;
+//                }
+//
+//                JSONObject addComonFields(JSONObject jsonObject) throws JSONException {
+//                    jsonObject.put("lat", "34.435");
+//                    jsonObject.put("long", "-98.405");
+//                    jsonObject.put("observed_at", DateFormat.getDateTimeInstance().format(new Date()));
+//                    jsonObject.put("version", "test");
+//
+//                    return jsonObject;
+//                }
+
+                @Override
+                public void onResponse(StingrayReading response) {
+                    Log.d(TAG, "onResponse");
+                    Log.d(TAG, "location: " + response.getLocation());
+                }
+
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.d(TAG, "onErrorResponse");
+//                    Log.d(TAG, error.getMessage());
+                }
+            };
+            RecurringRequest postStingrayReadingRequest = new RecurringRequest(FACTOIDS_FREQUENCY_VALUE, FACTOIDS_FREQUENCY_UNIT, postStingrayReadingRequester);
+            mStingrayClientService.addRecurringRequest(postStingrayReadingRequest);
+
             mStingrayClientService.scheduleRecurringRequests();
         }
 
