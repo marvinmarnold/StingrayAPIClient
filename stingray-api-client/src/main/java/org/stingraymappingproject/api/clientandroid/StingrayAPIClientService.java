@@ -73,6 +73,20 @@ public class StingrayAPIClientService extends Service {
         return START_STICKY;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(!isInitialized) return;
+        mRequestScheduler = null;
+        isInitialized = false;
+
+        if (!isInitialized) return;
+        for(RecurringRequest request : mRecurringRequests) {
+            request.cancel();
+        }
+        mRecurringRequests = null;
+    }
+
     public void queueOfflineRequests() {
         Log.d(TAG, "queueOfflineRequests");
         if(isInitialized && isOnline()) {

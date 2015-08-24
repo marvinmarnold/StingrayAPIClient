@@ -13,7 +13,7 @@ ext {
     siteUrl = 'https://github.com/marvinmarnold/StingrayAPIClient'      // Homepage URL of the library
     gitUrl = 'https://github.com/marvinmarnold/StingrayAPIClient.git'   // Git repository URL
 
-    libraryVersion = '0.0.52'
+    libraryVersion = '0.0.531'
 
     developerId = 'marvinmarnold'
     developerName = 'Marvin Arnold'
@@ -43,6 +43,7 @@ android {
 }
 
 dependencies {
+    compile 'com.android.support:appcompat-v7:22.2.1'
     compile 'com.mcxiaoke.volley:library:1.0.18'
     compile 'com.google.code.gson:gson:2.3.1'
 }
