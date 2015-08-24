@@ -27,44 +27,22 @@ public class ClientServiceTest extends ServiceTestCase<ClientService> {
         super(ClientService.class);
     }
 
-    /**
-     * Test basic startup/shutdown of Service
-     */
-    @SmallTest
-    public void testStartable() {
-        Intent startIntent = new Intent();
-        startIntent.setClass(getContext(), ClientService.class);
-        startService(startIntent);
-    }
-
-    /**
-     * Test binding to service
-     */
-    @MediumTest
-    public void testBindable() {
-        Intent startIntent = new Intent();
-        startIntent.setClass(getContext(), ServiceTestCase.class);
-        IBinder service = bindService(startIntent);
-    }
-
-    /**
-     * The name 'test preconditions' is a convention to signal that if this
-     * test doesn't pass, the test case was not set up properly and it might
-     * explain any and all failures in other tests.  This is not guaranteed
-     * to run before other tests, as junit uses reflection to find the tests.
-     */
-    @SmallTest
-    public void testPreconditions() {
-    }
-
     public void testRequestsPointToFullApiUrl() {
-        ClientService client = new ClientService();
-
+        startService();
+        ClientService client = getService();
         client.setApiBaseUrl(apiBaseUrl);
 
         TestJsonObjectResponseRequester r = new TestJsonObjectResponseRequester(client);
         assertEquals(apiBaseUrl + apiEndpoint1, r.testGetRequestParams().getRequestUrl());
     }
+
+    public void testInitializes() {
+        startService();
+        ClientService client = getService();
+        client.init();
+        assertTrue(client.isInitialized);
+    }
+
     class TestJsonObjectResponseRequester extends JsonObjectResponseRequester {
 
         public TestJsonObjectResponseRequester(ClientService clientService) {
@@ -94,5 +72,41 @@ public class ClientServiceTest extends ServiceTestCase<ClientService> {
         public void onResponse(Object response) {
 
         }
+    }
+
+    /**
+     * Test basic startup/shutdown of Service
+     */
+    @SmallTest
+    public void testStartable() {
+        startService();
+        assertNotNull(getService());
+    }
+
+    /**
+     * Test binding to service
+     */
+    @MediumTest
+    public void testBindable() {
+        Intent startIntent = new Intent();
+        startIntent.setClass(getContext(), ServiceTestCase.class);
+        IBinder service = bindService(startIntent);
+        assertNotNull(service);
+    }
+
+    /**
+     * The name 'test preconditions' is a convention to signal that if this
+     * test doesn't pass, the test case was not set up properly and it might
+     * explain any and all failures in other tests.  This is not guaranteed
+     * to run before other tests, as junit uses reflection to find the tests.
+     */
+    @SmallTest
+    public void testPreconditions() {
+    }
+
+    public void startService() {
+        Intent startIntent = new Intent();
+        startIntent.setClass(getContext(), ClientService.class);
+        startService(startIntent);
     }
 }

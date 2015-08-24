@@ -47,7 +47,7 @@ public class ClientService extends Service {
     private ArrayList<RequestParams> mOfflineRequests;
     private ConnectivityManager mConnectivityManager;
     private ScheduledExecutorService mRequestScheduler;
-    private boolean isInitialized = false;
+    public boolean isInitialized = false;
 
     public class ClientServiceBinder extends Binder {
         public ClientService getService() {
@@ -102,6 +102,7 @@ public class ClientService extends Service {
         mRequestQueue = Volley.newRequestQueue(mContext);
         mOfflineRequests = new ArrayList<RequestParams>();
         this.mConnectivityManager = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        this.isInitialized = true;
     }
 
     public void scheduleRecurringRequests() {
