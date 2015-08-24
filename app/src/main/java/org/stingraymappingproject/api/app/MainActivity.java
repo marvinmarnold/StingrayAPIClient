@@ -119,8 +119,8 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "onErrorResponse");
             }
         };
-        RecurringRequest recurringFactoidsRequest = new RecurringRequest(FREQUENCY_VALUE, FREQUENCY_UNIT, nearbyRequester);
-        mStingrayStingrayAPIClientService.addRecurringRequest(recurringFactoidsRequest);
+        RecurringRequest recurringRequest = new RecurringRequest(FREQUENCY_VALUE, FREQUENCY_UNIT, nearbyRequester);
+        mStingrayStingrayAPIClientService.addRecurringRequest(recurringRequest);
     }
 
     public void scheduleFactoidsRequester() {
@@ -139,8 +139,8 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "onErrorResponse");
             }
         };
-        RecurringRequest recurringFactoidsRequest = new RecurringRequest(FREQUENCY_VALUE, FREQUENCY_UNIT, factoidsRequester);
-        mStingrayStingrayAPIClientService.addRecurringRequest(recurringFactoidsRequest);
+        RecurringRequest recurringRequest = new RecurringRequest(FREQUENCY_VALUE, FREQUENCY_UNIT, factoidsRequester);
+        mStingrayStingrayAPIClientService.addRecurringRequest(recurringRequest);
     }
 
     public void schedulePostStingrayReadingRequester() {
@@ -157,14 +157,12 @@ public class MainActivity extends AppCompatActivity {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
-
                 return datum.toString();
             }
 
             @Override
             public void onResponse(StingrayReading response) {
                 Log.d(TAG, "onResponse");
-                Log.d(TAG, "location: " + response.getLocation());
             }
 
             @Override
@@ -173,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        RecurringRequest postStingrayReadingRequest = new RecurringRequest(FREQUENCY_VALUE, FREQUENCY_UNIT, postStingrayReadingRequester);
-        mStingrayStingrayAPIClientService.addRecurringRequest(postStingrayReadingRequest);
+        RecurringRequest recurringRequest = new RecurringRequest(FREQUENCY_VALUE, FREQUENCY_UNIT, postStingrayReadingRequester);
+        mStingrayStingrayAPIClientService.addRecurringRequest(recurringRequest);
     }
 }

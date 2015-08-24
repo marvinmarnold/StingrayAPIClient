@@ -12,7 +12,7 @@ public class StingrayReading {
         return id;
     }
 
-    public String getObserved_at() {
+    public String getObservedAt() {
         return observed_at;
     }
 
@@ -20,15 +20,15 @@ public class StingrayReading {
         return location;
     }
 
-    public String getThreat_level() {
+    public String getThreatLevel() {
         return threat_level;
     }
 
-    public String getUpdated_at() {
+    public String getUpdatedAt() {
         return updated_at;
     }
 
-    public String getCreated_at() {
+    public String getCreatedAt() {
         return created_at;
     }
 
@@ -42,6 +42,15 @@ public class StingrayReading {
     String updated_at;
     String created_at;
     String version;
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
     String latitude;
     String longitude;
 }
