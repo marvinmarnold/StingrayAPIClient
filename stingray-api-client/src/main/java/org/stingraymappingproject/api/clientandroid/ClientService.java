@@ -12,8 +12,6 @@ import android.util.Log;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
-import org.stingraymappingproject.api.clientandroid.params.RequestParams;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -44,7 +42,7 @@ public class ClientService extends Service {
     private List<RecurringRequest> mRecurringRequests;
 
     private RequestQueue mRequestQueue;
-    private ArrayList<RequestParams> mOfflineRequests;
+    private ArrayList<GsonRequest> mOfflineRequests;
     private ConnectivityManager mConnectivityManager;
     private ScheduledExecutorService mRequestScheduler;
     public boolean isInitialized = false;
@@ -76,16 +74,16 @@ public class ClientService extends Service {
     }
 
     public void queueOfflineRequests() {
-        Log.d(TAG, "queueOfflineRequests");
-        if(isInitialized && isOnline()) {
-            ArrayList<RequestParams> t = (ArrayList<RequestParams>) mOfflineRequests.clone();
-            mOfflineRequests.clear();
-
-            for(RequestParams offlineRequest : t) {
-                Log.d(TAG, "Syncing offlineRequests");
-                mRequestQueue.add(offlineRequest.buildRequest());
-            }
-        }
+//        Log.d(TAG, "queueOfflineRequests");
+//        if(isInitialized && isOnline()) {
+//            ArrayList<GsonRequest> t = (ArrayList<GsonRequest>) mOfflineRequests.clone();
+//            mOfflineRequests.clear();
+//
+//            for(GsonRequest offlineRequest : t) {
+//                Log.d(TAG, "Syncing offlineRequests");
+//                mRequestQueue.add(offlineRequest.buildRequest());
+//            }
+//        }
     }
 
     public boolean isOnline() {
@@ -100,7 +98,7 @@ public class ClientService extends Service {
         mRequestScheduler = Executors.newScheduledThreadPool(1);
         mRecurringRequests = new ArrayList<>();
         mRequestQueue = Volley.newRequestQueue(mContext);
-        mOfflineRequests = new ArrayList<RequestParams>();
+        mOfflineRequests = new ArrayList<GsonRequest>();
         this.mConnectivityManager = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
         this.isInitialized = true;
     }

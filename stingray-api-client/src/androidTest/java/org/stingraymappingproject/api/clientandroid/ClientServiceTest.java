@@ -10,8 +10,7 @@ import com.android.volley.Request;
 import com.android.volley.VolleyError;
 
 import org.json.JSONObject;
-import org.stingraymappingproject.api.clientandroid.params.RequestParams;
-import org.stingraymappingproject.api.clientandroid.requesters.JsonObjectResponseRequester;
+import org.stingraymappingproject.api.clientandroid.requesters.Requester;
 
 /**
  * Created by Marvin Arnold on 23/08/15.
@@ -32,8 +31,8 @@ public class ClientServiceTest extends ServiceTestCase<ClientService> {
         ClientService client = getService();
         client.setApiBaseUrl(apiBaseUrl);
 
-        TestJsonObjectResponseRequester r = new TestJsonObjectResponseRequester(client);
-        assertEquals(apiBaseUrl + apiEndpoint1, r.testGetRequestParams().getRequestUrl());
+        TestRequester r = new TestRequester(client);
+        assertEquals(apiBaseUrl + apiEndpoint1, r.getRequest().getUrl());
     }
 
     public void testInitializes() {
@@ -43,24 +42,10 @@ public class ClientServiceTest extends ServiceTestCase<ClientService> {
         assertTrue(client.isInitialized);
     }
 
-    class TestJsonObjectResponseRequester extends JsonObjectResponseRequester {
+    class TestRequester extends Requester {
 
-        public TestJsonObjectResponseRequester(ClientService clientService) {
+        public TestRequester(ClientService clientService) {
             super(clientService);
-        }
-
-        @Override
-        protected JSONObject getJSONObject() {
-            return null;
-        }
-
-        @Override
-        protected RequestParams getRequestParams() {
-            return getRequestParams(apiEndpoint1, Request.Method.GET);
-        }
-
-        public RequestParams testGetRequestParams() {
-            return getRequestParams();
         }
 
         @Override
@@ -71,6 +56,16 @@ public class ClientServiceTest extends ServiceTestCase<ClientService> {
         @Override
         public void onResponse(Object response) {
 
+        }
+
+        @Override
+        protected JSONObject getJSONObjectParameters() {
+            return null;
+        }
+
+        @Override
+        protected GsonRequest getRequest() {
+            return getRequest(apiEndpoint1, Request.Method.GET, null);
         }
     }
 

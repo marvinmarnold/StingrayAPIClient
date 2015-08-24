@@ -15,9 +15,12 @@ import com.android.volley.VolleyError;
 
 import org.stingraymappingproject.api.clientandroid.ClientService;
 import org.stingraymappingproject.api.clientandroid.RecurringRequest;
+import org.stingraymappingproject.api.clientandroid.models.Factoid;
 import org.stingraymappingproject.api.clientandroid.requesters.FactoidsRequester;
 import org.stingraymappingproject.api.clientandroid.requesters.Requester;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
@@ -88,10 +91,15 @@ public class MainActivity extends AppCompatActivity {
             mStingrayClientService = ((ClientService.ClientServiceBinder) service).getService();
             mBoundToStingrayClientService = true;
 
-            Requester factoidsRequester = new FactoidsRequester(mStingrayClientService) {
+            Requester<Factoid[]> factoidsRequester = new FactoidsRequester(mStingrayClientService) {
+
                 @Override
-                public void onResponse(Object response) {
+                public void onResponse(Factoid[] response) {
+                    List<Factoid> factoids = Arrays.asList(response);
                     Log.d(TAG, "onResponse");
+                    for(Factoid f : factoids) {
+                        Log.d(TAG, f.getFact());
+                    }
                 }
 
                 @Override

@@ -44,6 +44,7 @@ android {
 
 dependencies {
     compile 'com.mcxiaoke.volley:library:1.0.18'
+    compile 'com.google.code.gson:gson:2.3.1'
 }
 
 apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'

@@ -4,15 +4,15 @@ import com.android.volley.Response;
 
 import org.json.JSONObject;
 import org.stingraymappingproject.api.clientandroid.ClientService;
-import org.stingraymappingproject.api.clientandroid.params.RequestParams;
+import org.stingraymappingproject.api.clientandroid.GsonRequest;
 
 /**
  * Created by Marvin Arnold on 23/08/15.
  */
-public abstract class Requester implements Runnable, Response.Listener, Response.ErrorListener {
+public abstract class Requester<T> implements Runnable, Response.Listener<T>, Response.ErrorListener {
     private final ClientService mClientService;
-    protected abstract JSONObject getJSONObject();
-    protected abstract RequestParams getRequestParams();
+    protected abstract JSONObject getJSONObjectParameters();
+    protected abstract GsonRequest<T> getRequest();
 
     public String getRequestUrlForEndpoint(String endpointPath) {
         return mClientService.getApiBaseUrl() + endpointPath;
@@ -24,6 +24,10 @@ public abstract class Requester implements Runnable, Response.Listener, Response
 
     @Override
     public void run() {
-        mClientService.getRequestQueue().add(getRequestParams().buildRequest());
+        mClientService.getRequestQueue().add(getRequest());
+    }
+
+    protected GsonRequest<T> getRequest(String endpointPath, int requestMethod, Class<T> responseClass) {
+        return new GsonRequest<T>(getJSONObjectParameters(), getRequestUrlForEndpoint(endpointPath), requestMethod, this, this, responseClass);
     }
 }
