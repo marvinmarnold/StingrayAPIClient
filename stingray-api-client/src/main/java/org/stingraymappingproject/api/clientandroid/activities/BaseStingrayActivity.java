@@ -15,7 +15,7 @@ import org.stingraymappingproject.api.clientandroid.StingrayAPIClientService;
  */
 public abstract class BaseStingrayActivity extends AppCompatActivity {
     private final static String TAG = "BaseStingrayActivity";
-    private final Context mContext = this;
+    protected final Context mContext = this;
     protected boolean mBoundToStingrayAPIService;
     protected StingrayAPIClientService mStingrayAPIService;
 
