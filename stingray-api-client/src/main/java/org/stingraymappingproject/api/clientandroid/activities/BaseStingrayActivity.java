@@ -15,7 +15,7 @@ import org.stingraymappingproject.api.clientandroid.StingrayAPIClientService;
  */
 public abstract class BaseStingrayActivity extends AppCompatActivity {
     private final static String TAG = "BaseStingrayActivity";
-    protected final Context mContext = this;
+    protected Context mContext;
     protected boolean mBoundToStingrayAPIService;
     protected StingrayAPIClientService mStingrayAPIService;
 
@@ -34,9 +34,12 @@ public abstract class BaseStingrayActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
+        this.mContext = getApplicationContext();
         startStingrayClientService();
     }
 
+
+    @Override
     public void onStop() {
         super.onStop();
     }
