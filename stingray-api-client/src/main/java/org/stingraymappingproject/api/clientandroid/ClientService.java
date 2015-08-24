@@ -12,7 +12,7 @@ import android.util.Log;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
-import org.stingraymappingproject.api.clientandroid.RequestParams.RequestParams;
+import org.stingraymappingproject.api.clientandroid.params.RequestParams;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +28,7 @@ public class ClientService extends Service {
     public static String ACTION_SYNC_DATA = "ACTION_SYNC_DATA";
 
     // Final
-    private final Context mContext = getApplicationContext();
+    private Context mContext;
     private final IBinder mBinder = new ClientServiceBinder();
 
     public String getApiBaseUrl() {
@@ -42,8 +42,6 @@ public class ClientService extends Service {
     // Should end with '/'
     private String mApiBaseUrl = "http://api.stingraymappingproject.org/";
     private List<RecurringRequest> mRecurringRequests;
-
-
 
     private RequestQueue mRequestQueue;
     private ArrayList<RequestParams> mOfflineRequests;
@@ -68,9 +66,11 @@ public class ClientService extends Service {
         Log.d(TAG, "onStartCommand");
         init();
         if (intent != null &&
-                intent.getAction() != null &&
-                intent.getAction().equals(ACTION_SYNC_DATA))
+            intent.getAction() != null &&
+            intent.getAction().equals(ACTION_SYNC_DATA)) {
+
             queueOfflineRequests();
+        }
 
         return START_STICKY;
     }
@@ -96,6 +96,7 @@ public class ClientService extends Service {
 
     public void init() {
         if(isInitialized) return;
+        mContext = getApplicationContext();
         mRequestScheduler = Executors.newScheduledThreadPool(1);
         mRecurringRequests = new ArrayList<>();
         mRequestQueue = Volley.newRequestQueue(mContext);

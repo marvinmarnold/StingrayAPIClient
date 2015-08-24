@@ -1,8 +1,8 @@
-package org.stingraymappingproject.api.clientandroid.RequestRunnable;
+package org.stingraymappingproject.api.clientandroid.requesters;
 
 import org.stingraymappingproject.api.clientandroid.ClientService;
-import org.stingraymappingproject.api.clientandroid.RequestParams.JsonArrayResponseRequestParams;
-import org.stingraymappingproject.api.clientandroid.RequestParams.RequestParams;
+import org.stingraymappingproject.api.clientandroid.params.JsonArrayResponseRequestParams;
+import org.stingraymappingproject.api.clientandroid.params.RequestParams;
 
 /**
  * Created by Marvin Arnold on 23/08/15.

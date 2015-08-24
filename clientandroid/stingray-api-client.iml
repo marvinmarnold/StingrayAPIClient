@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module external.linked.project.id=":stingray-api-client" external.linked.project.path="$MODULE_DIR$/../stingray-api-client" external.root.project.path="$MODULE_DIR$/.." external.system.id="GRADLE" external.system.module.group="org.stingraymappingproject.api" external.system.module.version="0.0.51" type="JAVA_MODULE" version="4">
+<module external.linked.project.id=":stingray-api-client" external.linked.project.path="$MODULE_DIR$/../stingray-api-client" external.root.project.path="$MODULE_DIR$/.." external.system.id="GRADLE" external.system.module.group="org.stingraymappingproject.api" external.system.module.version="0.0.52" type="JAVA_MODULE" version="4">
   <component name="FacetManager">
     <facet type="android-gradle" name="Android-Gradle">
       <configuration>
@@ -65,7 +65,6 @@
       <sourceFolder url="file://$MODULE_DIR$/../stingray-api-client/src/androidTest/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/../stingray-api-client/src/androidTest/jni" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/../stingray-api-client/src/androidTest/rs" isTestSource="true" />
-      <excludeFolder url="file://$MODULE_DIR$/../stingray-api-client/build/docs" />
       <excludeFolder url="file://$MODULE_DIR$/../stingray-api-client/build/intermediates/assets" />
       <excludeFolder url="file://$MODULE_DIR$/../stingray-api-client/build/intermediates/bundles" />
       <excludeFolder url="file://$MODULE_DIR$/../stingray-api-client/build/intermediates/classes" />
@@ -85,16 +84,11 @@
       <excludeFolder url="file://$MODULE_DIR$/../stingray-api-client/build/intermediates/res" />
       <excludeFolder url="file://$MODULE_DIR$/../stingray-api-client/build/intermediates/rs" />
       <excludeFolder url="file://$MODULE_DIR$/../stingray-api-client/build/intermediates/symbols" />
-      <excludeFolder url="file://$MODULE_DIR$/../stingray-api-client/build/libs" />
       <excludeFolder url="file://$MODULE_DIR$/../stingray-api-client/build/outputs" />
-      <excludeFolder url="file://$MODULE_DIR$/../stingray-api-client/build/poms" />
       <excludeFolder url="file://$MODULE_DIR$/../stingray-api-client/build/tmp" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 22 Platform (1)" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="library-1.0.18" level="project" />
-    <orderEntry type="library" exported="" name="support-v4-22.2.1" level="project" />
-    <orderEntry type="library" exported="" name="support-annotations-22.2.1" level="project" />
-    <orderEntry type="library" exported="" name="appcompat-v7-22.2.1" level="project" />
   </component>
 </module>

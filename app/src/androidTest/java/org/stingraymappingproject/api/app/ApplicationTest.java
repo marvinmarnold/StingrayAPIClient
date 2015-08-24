@@ -1,4 +1,4 @@
-package org.stingraymappingproject.api.clientandroid;
+package org.stingraymappingproject.api.app;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

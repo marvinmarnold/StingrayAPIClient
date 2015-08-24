@@ -2,7 +2,7 @@ package org.stingraymappingproject.api.clientandroid;
 
 import android.util.Log;
 
-import org.stingraymappingproject.api.clientandroid.RequestRunnable.Requester;
+import org.stingraymappingproject.api.clientandroid.requesters.Requester;
 
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;

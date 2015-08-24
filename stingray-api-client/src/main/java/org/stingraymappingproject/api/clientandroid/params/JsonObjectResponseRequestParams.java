@@ -1,4 +1,4 @@
-package org.stingraymappingproject.api.clientandroid.RequestParams;
+package org.stingraymappingproject.api.clientandroid.params;
 
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonObjectRequest;

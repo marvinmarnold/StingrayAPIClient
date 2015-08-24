@@ -10,8 +10,8 @@ import com.android.volley.Request;
 import com.android.volley.VolleyError;
 
 import org.json.JSONObject;
-import org.stingraymappingproject.api.clientandroid.RequestParams.RequestParams;
-import org.stingraymappingproject.api.clientandroid.RequestRunnable.JsonObjectResponseRequester;
+import org.stingraymappingproject.api.clientandroid.params.RequestParams;
+import org.stingraymappingproject.api.clientandroid.requesters.JsonObjectResponseRequester;
 
 /**
  * Created by Marvin Arnold on 23/08/15.
@@ -22,11 +22,9 @@ public class ClientServiceTest extends ServiceTestCase<ClientService> {
 
     /**
      * Constructor
-     *
-     * @param serviceClass The type of the service under test.
      */
-    public ClientServiceTest(Class<ClientService> serviceClass) {
-        super(serviceClass);
+    public ClientServiceTest() {
+        super(ClientService.class);
     }
 
     /**
@@ -65,7 +63,7 @@ public class ClientServiceTest extends ServiceTestCase<ClientService> {
         client.setApiBaseUrl(apiBaseUrl);
 
         TestJsonObjectResponseRequester r = new TestJsonObjectResponseRequester(client);
-        assertEquals(apiBaseUrl + apiEndpoint1, r.testGetRequestParams());
+        assertEquals(apiBaseUrl + apiEndpoint1, r.testGetRequestParams().getRequestUrl());
     }
     class TestJsonObjectResponseRequester extends JsonObjectResponseRequester {
 
