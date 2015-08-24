@@ -38,4 +38,14 @@ public class ClientServiceTest extends ServiceTestCase<ClientService> {
         startIntent.setClass(getContext(), ServiceTestCase.class);
         IBinder service = bindService(startIntent);
     }
+
+    /**
+     * The name 'test preconditions' is a convention to signal that if this
+     * test doesn't pass, the test case was not set up properly and it might
+     * explain any and all failures in other tests.  This is not guaranteed
+     * to run before other tests, as junit uses reflection to find the tests.
+     */
+    @SmallTest
+    public void testPreconditions() {
+    }
 }
