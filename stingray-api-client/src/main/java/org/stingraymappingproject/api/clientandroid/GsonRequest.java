@@ -53,4 +53,10 @@ public class GsonRequest<T> extends JsonRequest<T> {
         this.mSuccessListener.onResponse(response);
     }
 
+    @Override
+    public String getBodyContentType()
+    {
+        return "application/json";
+    }
+
 }

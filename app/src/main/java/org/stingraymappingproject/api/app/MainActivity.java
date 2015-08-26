@@ -31,10 +31,9 @@ public class MainActivity extends BaseStingrayActivity {
 
     @Override
     protected void scheduleRequesters() {
-//        scheduleNearbyRequester();
+        scheduleNearbyRequester();
 //        scheduleFactoidsRequester();
 //        schedulePostStingrayReadingRequester();
-        schedulePostStingrayReadingRequester();
     }
 
 
@@ -78,8 +77,10 @@ public class MainActivity extends BaseStingrayActivity {
                     e.printStackTrace();
                 }
 
-                Log.d(TAG, "scheduleNearbyRequester: " + timeAndSpaceField);
-                return "time_and_space=" + nearbyFields.toString();
+
+                    Log.d(TAG, "scheduleNearbyRequester: " + timeAndSpaceField.toString());
+                    return timeAndSpaceField.toString();
+
             }
 
             @Override
@@ -154,7 +155,7 @@ public class MainActivity extends BaseStingrayActivity {
         RecurringRequest recurringRequest = new RecurringRequest(FREQUENCY_VALUE, FREQUENCY_UNIT, postStingrayReadingRequester);
         mStingrayAPIService.addRecurringRequest(recurringRequest);
     }
-    
+
     public String getVersion() {
         PackageManager pm = getPackageManager();
         PackageInfo pInfo = null;

@@ -9,9 +9,6 @@ import com.android.volley.VolleyError;
 import org.stingraymappingproject.api.clientandroid.GsonRequest;
 import org.stingraymappingproject.api.clientandroid.StingrayAPIClientService;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-
 /**
  * Created by Marvin Arnold on 23/08/15.
  */
@@ -26,11 +23,7 @@ public abstract class Requester<T> implements Runnable, Response.Listener<T>, Re
     }
 
     public String getRequestUrlWParams(String endpointPath, String requestParams) {
-        try {
-            return getRequestUrlForEndpoint(endpointPath) + "?" + URLEncoder.encode(requestParams, "utf-8");
-        } catch (UnsupportedEncodingException e) {
-            return null;
-        }
+        return getRequestUrlForEndpoint(endpointPath) + "?" + requestParams;
     }
 
     public Requester(StingrayAPIClientService stingrayAPIClientService) {

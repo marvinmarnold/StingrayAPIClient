@@ -17,6 +17,6 @@ public abstract class NearbyRequester extends Requester<StingrayReading[]> {
 
     @Override
     protected GsonRequest<StingrayReading[]> getRequest() {
-        return getRequest("nearby", Request.Method.GET, StingrayReading[].class);
+        return getRequest("nearby", Request.Method.PUT, StingrayReading[].class);
     }
 }
