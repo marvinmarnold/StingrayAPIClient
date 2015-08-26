@@ -35,14 +35,6 @@ public class StingrayReading {
     public String getVersion() {
         return version;
     }
-
-
-    String location;
-    String threat_level;
-    String updated_at;
-    String created_at;
-    String version;
-
     public String getLatitude() {
         return latitude;
     }
@@ -51,6 +43,13 @@ public class StingrayReading {
         return longitude;
     }
 
+    String location;
+    String threat_level;
+    String updated_at;
+    String created_at;
+    String version;
+    boolean isSelfGenerated = false;
+    String uniqueToken;
     String latitude;
     String longitude;
 }

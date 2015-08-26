@@ -38,7 +38,6 @@ public abstract class BaseStingrayActivity extends AppCompatActivity {
         startStingrayClientService();
     }
 
-
     @Override
     public void onStop() {
         super.onStop();
