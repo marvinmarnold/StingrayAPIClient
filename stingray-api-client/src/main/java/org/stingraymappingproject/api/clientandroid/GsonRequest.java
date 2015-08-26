@@ -52,4 +52,5 @@ public class GsonRequest<T> extends JsonRequest<T> {
     protected void deliverResponse(T response) {
         this.mSuccessListener.onResponse(response);
     }
+
 }

@@ -1,55 +1,52 @@
 package org.stingraymappingproject.api.clientandroid.models;
 
+import java.math.BigInteger;
+import java.security.SecureRandom;
+import java.util.Date;
+
 /**
  * Created by Marvin Arnold on 24/08/15.
  */
 public class StingrayReading {
-    String id;
-    String observed_at;
-
-
-    public String getId() {
-        return id;
-    }
-
-    public String getObservedAt() {
-        return observed_at;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public String getThreatLevel() {
-        return threat_level;
-    }
-
-    public String getUpdatedAt() {
-        return updated_at;
-    }
-
-    public String getCreatedAt() {
-        return created_at;
-    }
 
     public String getVersion() {
         return version;
     }
-    public String getLatitude() {
-        return latitude;
+
+    int threatLevel; // required
+    Date observedAt; // required
+    double latitude; // required
+    double longitude; // required
+
+    public String getUniqueToken() {
+        return uniqueToken;
     }
 
-    public String getLongitude() {
-        return longitude;
-    }
-
-    String location;
-    String threat_level;
-    String updated_at;
-    String created_at;
-    String version;
+    String uniqueToken; // required
+    String version; // required
+    String location; // optional
     boolean isSelfGenerated = false;
-    String uniqueToken;
-    String latitude;
-    String longitude;
+
+    public StingrayReading(int threatLevel, Date observedAt, double latitude, double longitude, String uniqueToken, String version) {
+        this.threatLevel = threatLevel;
+        this.observedAt = observedAt;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.version = version;
+
+        if(uniqueToken == null) uniqueToken = genRandomToken();
+        this.uniqueToken = uniqueToken;
+    }
+
+    public String genRandomToken() {
+        return new SessionIdentifierGenerator().nextSessionId();
+    }
+
+    public final class SessionIdentifierGenerator {
+        private SecureRandom random = new SecureRandom();
+
+        public String nextSessionId() {
+            return new BigInteger(130, random).toString(32);
+        }
+    }
 }
