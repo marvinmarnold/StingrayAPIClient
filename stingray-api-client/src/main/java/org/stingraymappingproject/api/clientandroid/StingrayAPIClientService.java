@@ -7,12 +7,15 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Binder;
 import android.os.IBinder;
-import android.util.Log;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
+import org.stingraymappingproject.api.clientandroid.models.Factoid;
+import org.stingraymappingproject.api.clientandroid.models.StingrayReading;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -37,8 +40,9 @@ public class StingrayAPIClientService extends Service {
     }
     public void setApiBaseUrl(String apiBaseUrl) { this.mApiBaseUrl = apiBaseUrl; }
 
+
     // Should end with '/'
-    private String mApiBaseUrl = "http://api.stingraymappingproject.org/";
+    private String mApiBaseUrl = "https://stingray-mapping-server.herokuapp.com/";
     private List<RecurringRequest> mRecurringRequests;
 
     private RequestQueue mRequestQueue;
@@ -46,6 +50,26 @@ public class StingrayAPIClientService extends Service {
     private ConnectivityManager mConnectivityManager;
     private ScheduledExecutorService mRequestScheduler;
     public boolean isInitialized = false;
+
+    protected List<Factoid> mFactoids;
+
+    public List<StingrayReading> getStingrayReadings() {
+        return mStingrayReadings;
+    }
+
+    public List<Factoid> getFactoids() {
+        return mFactoids;
+    }
+
+    public void setStingrayReadings(StingrayReading[] stingrayReadings) {
+        this.mStingrayReadings = Arrays.asList(stingrayReadings);
+    }
+
+    public void addStingrayReading(StingrayReading stingrayReading) {
+        this.mStingrayReadings.add(stingrayReading);
+    }
+
+    protected List<StingrayReading> mStingrayReadings;
 
     public class ClientServiceBinder extends Binder {
         public StingrayAPIClientService getService() {
@@ -55,13 +79,13 @@ public class StingrayAPIClientService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        Log.d(TAG, "#onBind");
+//        Log.d(TAG, "#onBind");
         return mBinder;
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.d(TAG, "onStartCommand");
+//        Log.d(TAG, "onStartCommand");
         init();
         if (intent != null &&
             intent.getAction() != null &&
@@ -88,12 +112,12 @@ public class StingrayAPIClientService extends Service {
     }
 
     public void queueOfflineRequests() {
-        Log.d(TAG, "queueOfflineRequests");
+//        Log.d(TAG, "queueOfflineRequests");
         if(isInitialized && isOnline()) {
             ArrayList<GsonRequest> t = (ArrayList<GsonRequest>) mOfflineRequests.clone();
             mOfflineRequests.clear();
             for(GsonRequest offlineRequest : t) {
-                Log.d(TAG, "Syncing offlineRequests");
+//                Log.d(TAG, "Syncing offlineRequests");
                 mRequestQueue.add(offlineRequest);
             }
         }
@@ -107,13 +131,15 @@ public class StingrayAPIClientService extends Service {
 
     public void init() {
         if(isInitialized) return;
-        mContext = getApplicationContext();
-        mRequestScheduler = Executors.newScheduledThreadPool(1);
-        mRecurringRequests = new ArrayList<>();
-        mRequestQueue = Volley.newRequestQueue(mContext);
-        mOfflineRequests = new ArrayList<GsonRequest>();
+        this.mContext = getApplicationContext();
+        this.mRequestScheduler = Executors.newScheduledThreadPool(1);
+        this.mRecurringRequests = new ArrayList<>();
+        this.mRequestQueue = Volley.newRequestQueue(mContext);
+        this.mOfflineRequests = new ArrayList<GsonRequest>();
         this.mConnectivityManager = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
         this.isInitialized = true;
+        this.mFactoids = new ArrayList<>();
+        this.mStingrayReadings = new ArrayList<>();
     }
 
     public void scheduleRecurringRequests() {

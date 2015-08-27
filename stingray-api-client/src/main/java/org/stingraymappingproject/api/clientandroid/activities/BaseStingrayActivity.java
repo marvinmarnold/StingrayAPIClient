@@ -4,6 +4,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -39,6 +40,11 @@ public abstract class BaseStingrayActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     public void onStop() {
         super.onStop();
     }
@@ -60,7 +66,7 @@ public abstract class BaseStingrayActivity extends AppCompatActivity {
         }
     }
 
-    private final ServiceConnection mStingrayAPIServiceConnection = new ServiceConnection() {
+    protected final ServiceConnection mStingrayAPIServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             Log.d(TAG, "onServiceConnected");

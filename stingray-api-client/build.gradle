@@ -13,7 +13,7 @@ ext {
     siteUrl = 'https://github.com/marvinmarnold/StingrayAPIClient'      // Homepage URL of the library
     gitUrl = 'https://github.com/marvinmarnold/StingrayAPIClient.git'   // Git repository URL
 
-    libraryVersion = '0.0.533'
+    libraryVersion = '0.0.539'
 
     developerId = 'marvinmarnold'
     developerName = 'Marvin Arnold'

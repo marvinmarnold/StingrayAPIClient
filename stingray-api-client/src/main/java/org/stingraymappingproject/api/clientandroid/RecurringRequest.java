@@ -1,7 +1,5 @@
 package org.stingraymappingproject.api.clientandroid;
 
-import android.util.Log;
-
 import org.stingraymappingproject.api.clientandroid.requesters.Requester;
 
 import java.util.concurrent.ScheduledExecutorService;
@@ -26,12 +24,12 @@ public class RecurringRequest {
     }
 
     public void schedule(ScheduledExecutorService scheduler) {
-        Log.d(TAG, "start scheduleUploader");
+//        Log.d(TAG, "start scheduleUploader");
         if (isScheduled) return;
 
         mRequester = scheduler.scheduleAtFixedRate(mRunnable, 0, mFrequencyValue, mFrequencyUnit);
         isScheduled = true;
-        Log.d(TAG, "end scheduleUploader");
+//        Log.d(TAG, "end scheduleUploader");
     }
 
     public void cancel() {
